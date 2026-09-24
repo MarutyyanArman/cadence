@@ -2,9 +2,9 @@ import { LanguageSwitcher } from "@/components/language-switcher";
 import { getDict } from "@/lib/i18n/server";
 
 /**
- * What you see when Arc doesn't know who you are.
+ * What you see when Cadence doesn't know who you are.
  *
- * Deliberately not a login form. There are no Arc passwords to get wrong —
+ * Deliberately not a login form. There are no Cadence passwords to get wrong —
  * identity comes from Telegram, and the only useful thing this screen can do
  * is say so and point at the bot.
  *

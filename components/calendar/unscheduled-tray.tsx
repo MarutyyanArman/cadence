@@ -19,7 +19,7 @@ const dotColor: Record<number, string> = {
 };
 
 /** What a tray item puts on the dataTransfer. Read by week-grid on drop. */
-export const DRAG_MIME = "application/x-arc-task";
+export const DRAG_MIME = "application/x-cadence-task";
 
 export type DragPayload = { taskId: string; title: string; minutes: number };
 

@@ -11,7 +11,7 @@ const POLL_MS = 60_000;
  * Delivery. Renders nothing.
  *
  * Mounted in the root layout so the evening streak notice reaches you on any
- * route — but note the honest limit: this only runs while an Arc tab is open.
+ * route — but note the honest limit: this only runs while a Cadence tab is open.
  * Real push with the browser closed needs a service worker and a push service,
  * which is a lot of infrastructure for an app that lives on localhost. That is
  * a deliberate stopping point, not an oversight.
@@ -44,7 +44,7 @@ export function Notifier() {
         const won = await claimNotification(c.kind, c.dedupeKey);
         if (cancelled || !won) continue;
         try {
-          new Notification(c.title, { body: c.body, tag: `arc-${c.kind}` });
+          new Notification(c.title, { body: c.body, tag: `cadence-${c.kind}` });
         } catch {
           /* the browser refused it; the claim stands so it won't retry forever */
         }

@@ -1,7 +1,7 @@
 -- ============================================================
 -- 007 — one database, many people
 --
--- Arc was built single-user: every table was implicitly "yours" and every view
+-- Cadence was built single-user: every table was implicitly "yours" and every view
 -- aggregated the whole database. This makes ownership explicit.
 --
 -- Three things have to change together, or the app leaks:
@@ -40,7 +40,7 @@ create index if not exists users_telegram_idx on users (telegram_id)
   where telegram_id is not null;
 
 -- ---------- the owner account ----------
--- A fixed id, so this migration is idempotent and so ARC_OWNER_USER_ID in the
+-- A fixed id, so this migration is idempotent and so CADENCE_OWNER_TELEGRAM_ID in the
 -- environment can name it. Everything that existed before multi-user becomes
 -- this account's; linking a Telegram id to it later carries that history over.
 insert into users (id, first_name, locale)

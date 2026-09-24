@@ -1,7 +1,7 @@
 /**
  * Fixture for `verify-queries.ts`.
  *
- * That script reads two goals that it never creates itself — "Ship Arc v1"
+ * That script reads two goals that it never creates itself — "Ship Cadence v1"
  * at 2/3 done with a "Calendar drag" task carrying ~100 minutes of logged
  * focus time. No such fixture exists anywhere in the six source folders this
  * project was assembled from, and nothing else in the schema or scripts
@@ -19,7 +19,7 @@ import { withUser, OWNER_USER_ID } from "../lib/session";
 async function main() {
   const sql = db();
 
-  const GOALS = ["Ship Arc v1", "Personal reading"];
+  const GOALS = ["Ship Cadence v1", "Personal reading"];
   const TASKS = ["Calendar drag", "Design the week grid", "Ship the timer bar"];
 
   // Clean slate — children before parents, since goal_id/task_id are ON DELETE SET NULL.
@@ -33,7 +33,7 @@ async function main() {
 
   const [{ id: arcId }] = await sql<{ id: string }[]>`
     insert into goals (user_id, title, color_slot, status)
-    values (${OWNER_USER_ID}, 'Ship Arc v1', 1, 'active')
+    values (${OWNER_USER_ID}, 'Ship Cadence v1', 1, 'active')
     returning id
   `;
   // A second goal so listGoals() has exactly 2 rows, per verify-queries.ts.
@@ -68,7 +68,7 @@ async function main() {
     values (${OWNER_USER_ID}, 'Ship the timer bar', ${arcId}, 'done', 2, 60, now() - interval '6 days')
   `;
 
-  console.log("seeded: 2 goals, 3 tasks under 'Ship Arc v1', 1 focus session");
+  console.log("seeded: 2 goals, 3 tasks under 'Ship Cadence v1', 1 focus session");
   await sql.end();
 }
 

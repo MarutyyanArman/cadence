@@ -19,7 +19,7 @@ export const DEFAULT_PREFS: NotificationPrefs = {
   streak_risk: false,
 };
 
-const KEY = "arc.notifications";
+const KEY = "cadence.notifications";
 
 export function loadPrefs(): NotificationPrefs {
   if (typeof window === "undefined") return DEFAULT_PREFS;

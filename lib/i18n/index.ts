@@ -6,7 +6,7 @@
  * components through `components/i18n-provider.tsx`, and both land here.
  *
  * The choice is carried in a cookie rather than a URL segment (`/ru/...`).
- * Every route in Arc is already `force-dynamic` — it reads live data on each
+ * Every route in Cadence is already `force-dynamic` — it reads live data on each
  * request — so a path prefix would buy no caching, and it would break every
  * link, bookmark and `revalidatePath` in the app for a preference that belongs
  * to the person, not the page.
@@ -22,7 +22,7 @@ export type Locale = (typeof LOCALES)[number];
 export const DEFAULT_LOCALE: Locale = "en";
 
 /** Read and written by both the server action and the switcher. */
-export const LOCALE_COOKIE = "arc_locale";
+export const LOCALE_COOKIE = "cadence_locale";
 
 /** A year: long enough that the choice is made once. */
 export const LOCALE_COOKIE_MAX_AGE = 60 * 60 * 24 * 365;

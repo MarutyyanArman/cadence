@@ -1,5 +1,5 @@
 /**
- * Русская версия всех текстов Arc.
+ * Русская версия всех текстов Cadence.
  *
  * Typed as `Dict`, so the compiler refuses a missing key, a stray one, or a
  * function whose shape drifted from the English original — a half-translated
@@ -74,7 +74,7 @@ export const ru: Dict = {
   },
 
   app: {
-    name: "Arc",
+    name: "Cadence",
     description: "Цели, задачи и время — с измеренным разрывом между ними.",
   },
 
@@ -84,14 +84,14 @@ export const ru: Dict = {
   },
 
   auth: {
-    heading: "Откройте Arc из Telegram",
+    heading: "Откройте Cadence из Telegram",
     body:
-      "Вход в Arc идёт через Telegram — пароль запоминать не нужно, а ваши записи видны только вам. Откройте бота и нажмите на приложение.",
+      "Вход в Cadence идёт через Telegram — пароль запоминать не нужно, а ваши записи видны только вам. Откройте бота и нажмите на приложение.",
     openInTelegram: "Открыть в Telegram",
     privacy:
-      "Arc хранит ваше имя и Telegram ID — чтобы понимать, где чьи задачи. Никому больше эти данные не передаются.",
+      "Cadence хранит ваше имя и Telegram ID — чтобы понимать, где чьи задачи. Никому больше эти данные не передаются.",
     devHint:
-      "Разработка: задайте ARC_DEV_USER_ID в .env.local, чтобы работать без Telegram. В production эта переменная игнорируется.",
+      "Разработка: задайте CADENCE_DEV_USER_ID в .env.local, чтобы работать без Telegram. В production эта переменная игнорируется.",
   },
 
   account: {
@@ -312,7 +312,7 @@ export const ru: Dict = {
     allow: "Разрешить уведомления",
     blockedHelp:
       "Браузер их блокирует. Включите их для этого сайта в настройках сайта и перезагрузите страницу.",
-    onlyWhileOpen: "Только пока открыта вкладка Arc.",
+    onlyWhileOpen: "Только пока открыта вкладка Cadence.",
 
     calledIt: (actual, estimate) =>
       `В точку — ${minutes(actual)} при оценке ${minutes(estimate)}`,

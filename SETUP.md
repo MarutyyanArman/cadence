@@ -1,4 +1,4 @@
-# Arc — assembled build
+# Cadence — assembled build
 
 The six download folders were **sequential phases of one project**, not six
 projects. They are merged here. 31 files, every internal import resolves.
@@ -47,7 +47,7 @@ folders and were needed to build/run/test the project at all:
 ## Setup
 
 ```bash
-npx create-next-app@latest arc --ts --tailwind --app --no-src-dir --eslint --import-alias "@/*" --turbopack
+npx create-next-app@latest cadence --ts --tailwind --app --no-src-dir --eslint --import-alias "@/*" --turbopack
 ```
 
 Copy this folder over the generated one (`app/globals.css` replaces the default), then:
@@ -60,7 +60,7 @@ That list is the union of every external import across all phases, verified
 against the code — not copied from a README.
 
 ```bash
-echo 'DATABASE_URL=postgres://user:pass@host:5432/arc' > .env.local
+echo 'DATABASE_URL=postgres://user:pass@host:5432/cadence' > .env.local
 ```
 
 ```bash
@@ -74,7 +74,7 @@ different calendar days for part of every evening — a daily task finished at
 (due labels, `focusMinutesToday`, every analytics day-bucket):
 
 ```bash
-psql "$DATABASE_URL" -c "alter database arc set timezone = 'Asia/Yerevan';"
+psql "$DATABASE_URL" -c "alter database cadence set timezone = 'Asia/Yerevan';"
 ```
 
 Substitute your own zone. This is a deliberate single-user trade: it is one
@@ -159,7 +159,7 @@ weeks, snapping, clamping, px↔minute round-trip, and overnight splitting.
 | `verify-timer.ts` | 16/16 |
 | `verify-analytics.ts` | 18/18 |
 
-`verify-queries.ts` initially failed 1/13 — it assumes a seed fixture ("Ship Arc
+`verify-queries.ts` initially failed 1/13 — it assumes a seed fixture ("Ship Cadence
 v1", 2/3 done, a task with ~100 logged minutes) that doesn't exist in any of the
 six source folders or in `schema.sql`. I wrote `scripts/seed.ts` from the
 assertions themselves; run it once before `verify-queries.ts`. `verify-calendar.ts`
@@ -172,7 +172,7 @@ One real dependency bug surfaced here: `app/actions.ts` uses `z.uuid()` and
 in `package.json` from the READMEs' unversioned `npm i zod`. Fixed to `^4.0.0`.
 
 **Browser** — `next dev`, driven by a real Chromium instance: `/`, `/calendar`,
-and `/analytics` all render correctly with live seeded data (Ship Arc v1 at
+and `/analytics` all render correctly with live seeded data (Ship Cadence v1 at
 67%, 2/3 tasks; "Calendar drag" task at 1h 40m/1h 30m). On `/calendar`,
 scheduling a task by native HTML5 drag from the tray, moving a block by pointer
 drag, resizing by the bottom-edge handle, and unscheduling via the × button
@@ -313,7 +313,7 @@ drift. It lives in TypeScript, where it's unit-tested.
 
 | File | What it is |
 |---|---|
-| `lib/notifications.ts` | What Arc may say and when, pure |
+| `lib/notifications.ts` | What Cadence may say and when, pure |
 | `lib/notification-prefs.ts` | Per-type toggles, in localStorage |
 | `migrations/004-notification-log.sql` | `notification_log` — the claim table |
 | `components/notifier.tsx` | Delivery. Renders nothing, mounted in the root layout |
@@ -330,7 +330,7 @@ costs nothing to ignore.**
   contains no "only", "should", "failed" or "again".
 - **Your best working hour** — fires once, in the hour `v_focus_by_hour` says
   you actually focus best, and only if you haven't started yet. Earns the
-  interruption with a figure only Arc has, then names one open task.
+  interruption with a figure only Cadence has, then names one open task.
 - **Streak about to lapse** — after 8pm, only with a live streak not yet earned.
   Says what is still standing, what it costs, and offers a banked rest day.
   **Off by default**: it is the one most likely to feel like nagging, so it
@@ -343,7 +343,7 @@ client inserts into `notification_log` *before* displaying; the unique index on
 `(kind, dedupe_key)` means that with several tabs open exactly one wins. Tested
 with eight simultaneous claims.
 
-**The honest limit**: this only runs while an Arc tab is open. Real push with the
+**The honest limit**: this only runs while a Cadence tab is open. Real push with the
 browser closed needs a service worker and a push service — genuine
 infrastructure for an app on localhost. That is a deliberate stopping point,
 and the settings card says so.
@@ -572,7 +572,7 @@ add it to `LOCALES`, `dictionaries`, `LOCALE_NAMES` and `LOCALE_SHORT` in
 
 ## Accounts, Telegram and the phone
 
-Arc was built single-user: every row was implicitly yours and every view
+Cadence was built single-user: every row was implicitly yours and every view
 aggregated the whole database. It now runs as a Telegram Mini App that anyone
 can open, so ownership had to become real.
 
@@ -626,11 +626,11 @@ with another bot's token.
 
 **The existing data was kept.** Migration 007 creates an owner account with a
 fixed id and assigns every pre-existing row to it. Setting
-`ARC_OWNER_TELEGRAM_ID` to your own id makes your first sign-in adopt that
+`CADENCE_OWNER_TELEGRAM_ID` to your own id makes your first sign-in adopt that
 account, history intact. It only fires while the account is unclaimed, so it
 cannot transfer an account twice.
 
-**Development still works without Telegram.** `ARC_DEV_USER_ID` makes
+**Development still works without Telegram.** `CADENCE_DEV_USER_ID` makes
 unauthenticated requests act as that account. It is guarded on `NODE_ENV` as
 well as on the variable being set, so a `.env` copied to a server by accident
 still can't hand out somebody's account — and there is deliberately no

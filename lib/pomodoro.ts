@@ -16,7 +16,7 @@ export const DEFAULT_POMODORO: PomodoroSettings = {
   sound: true,
 };
 
-const KEY = "arc.pomodoro";
+const KEY = "cadence.pomodoro";
 
 export function loadSettings(): PomodoroSettings {
   if (typeof window === "undefined") return DEFAULT_POMODORO;

@@ -1,5 +1,5 @@
 /**
- * What Arc is allowed to say, and when.
+ * What Cadence is allowed to say, and when.
  *
  * The rule every message here is written against: **it names a specific thing
  * and costs nothing to ignore.** Duolingo's owl works because it arrives at a
@@ -8,7 +8,7 @@
  * a week, and then none of the useful ones can reach you either.
  *
  * So: no "you haven't done anything today", no sad faces, no counting what you
- * failed to do. Every message states a fact only Arc knows, and offers an
+ * failed to do. Every message states a fact only Cadence knows, and offers an
  * action or nothing at all.
  *
  * Deciding is pure and lives here. Delivery is the browser's, and assembling
@@ -120,7 +120,7 @@ export function dueNotifications(
   }
 
   // 3. The hour you actually work best, as it arrives. Earns the interruption
-  //    with a fact only Arc has, then points at one task.
+  //    with a fact only Cadence has, then points at one task.
   if (
     ctx.bestHour &&
     ctx.bestHour.sessions >= MIN_SESSIONS_FOR_BEST_HOUR &&

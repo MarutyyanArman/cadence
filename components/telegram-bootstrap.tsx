@@ -38,7 +38,7 @@ declare global {
   }
 }
 
-/** Arc is dark-only; this is `--color-bg-canvas` resolved. */
+/** Cadence is dark-only; this is `--color-bg-canvas` resolved. */
 const CANVAS = "#0b0d10";
 
 export function TelegramBootstrap({ signedIn }: { signedIn: boolean }) {

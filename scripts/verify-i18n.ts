@@ -70,15 +70,15 @@ t(
 /* ---------------- nothing left in English ---------------- */
 
 /**
- * Words that are the same in both, or not words at all. "Arc" is the product,
+ * Words that are the same in both, or not words at all. "Cadence" is the product,
  * "XP" is a unit people read as a symbol, "EN"/"RU" label the switcher, and
  * "English" names a language in its own spelling — which is the point of it.
  */
-const ALLOWED_LATIN = /^(Arc|XP|EN|RU|English|h|m|min)$/;
+const ALLOWED_LATIN = /^(Cadence|XP|EN|RU|English|h|m|min)$/;
 
 /**
  * Not copy, so not translatable: two locale codes and the product's name.
- * "Arc" being identical in both is the point, not an oversight.
+ * "Cadence" being identical in both is the point, not an oversight.
  */
 const CODE_PATHS = new Set(["tag", "htmlLang", "app.name"]);
 
@@ -105,7 +105,7 @@ console.log("\n-- translated, not copied --");
 {
   // A Latin word is fine when the English string at the same key also has it:
   // that makes it a name or an identifier carried across — "Telegram",
-  // "ARC_DEV_USER_ID", ".env.local" — rather than a sentence nobody
+  // "CADENCE_DEV_USER_ID", ".env.local" — rather than a sentence nobody
   // translated. Anything Latin that the English string does *not* contain is
   // untranslated prose, which is what this is looking for.
   const latin = ruStrings.filter((l) => {

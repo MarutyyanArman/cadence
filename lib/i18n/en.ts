@@ -1,5 +1,5 @@
 /**
- * Every word Arc says, in English.
+ * Every word Cadence says, in English.
  *
  * This file is the source of truth for copy, not merely the English
  * translation of it: the pure modules (calibration, habits, quests,
@@ -63,7 +63,7 @@ export const en = {
   },
 
   app: {
-    name: "Arc",
+    name: "Cadence",
     description: "Goals, tasks and time — with the gap between them measured.",
   },
 
@@ -73,14 +73,14 @@ export const en = {
   },
 
   auth: {
-    heading: "Open Arc from Telegram",
+    heading: "Open Cadence from Telegram",
     body:
-      "Arc signs you in through Telegram, so there is no password to remember and your work is yours alone. Open the bot and tap the app.",
+      "Cadence signs you in through Telegram, so there is no password to remember and your work is yours alone. Open the bot and tap the app.",
     openInTelegram: "Open in Telegram",
     privacy:
-      "Arc stores your name and Telegram id so it knows whose tasks are whose. Nothing is shared with anyone else.",
+      "Cadence stores your name and Telegram id so it knows whose tasks are whose. Nothing is shared with anyone else.",
     devHint:
-      "Development: set ARC_DEV_USER_ID in .env.local to use Arc without Telegram. It is ignored in production.",
+      "Development: set CADENCE_DEV_USER_ID in .env.local to use Cadence without Telegram. It is ignored in production.",
   },
 
   account: {
@@ -297,7 +297,7 @@ export const en = {
     allow: "Allow notifications",
     blockedHelp:
       "Your browser is blocking them. Turn them back on for this site in its site settings, then reload.",
-    onlyWhileOpen: "Only while an Arc tab is open.",
+    onlyWhileOpen: "Only while a Cadence tab is open.",
 
     /* the messages themselves */
     calledIt: (actual: number, estimate: number) =>

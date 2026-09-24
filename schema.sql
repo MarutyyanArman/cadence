@@ -1,5 +1,5 @@
 -- ============================================================
--- Arc — Postgres schema (multi-user; sign-in is Telegram's, see lib/telegram.ts)
+-- Cadence — Postgres schema (multi-user; sign-in is Telegram's, see lib/telegram.ts)
 -- Run against Supabase or local Postgres 15+.
 -- All timestamps are UTC (timestamptz). Render in the user's zone client-side.
 -- ============================================================
@@ -34,7 +34,7 @@ create table users (
 
 create index users_telegram_idx on users (telegram_id) where telegram_id is not null;
 
--- A fixed id so migrations and ARC_OWNER_TELEGRAM_ID can both name it.
+-- A fixed id so migrations and CADENCE_OWNER_TELEGRAM_ID can both name it.
 insert into users (id, first_name, locale)
 values ('00000000-0000-0000-0000-000000000001', 'Owner', 'en')
 on conflict (id) do nothing;
@@ -175,7 +175,7 @@ create table task_tags (
 -- ============================================================
 
 -- ---------- notification log ----------
--- What Arc has already said. The unique index is the mechanism: a client
+-- What Cadence has already said. The unique index is the mechanism: a client
 -- claims a notification by inserting, and a conflicting insert means another
 -- tab already showed it.
 create table notification_log (

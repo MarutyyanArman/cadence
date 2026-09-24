@@ -2,7 +2,7 @@
  * How close your estimates land to reality, as a score out of 100.
  *
  * Every other task app scores volume — tasks closed, days logged. Volume is
- * trivially gamed: split a task in two and you scored twice. Arc stores an
+ * trivially gamed: split a task in two and you scored twice. Cadence stores an
  * estimate next to every actual, so it can score something that can't be
  * farmed, only learned.
  *

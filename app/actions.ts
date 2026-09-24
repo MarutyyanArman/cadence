@@ -343,7 +343,7 @@ export async function noteInterruption(sessionId: string): Promise<ActionResult>
 /* ---------------- notifications ---------------- */
 
 /**
- * Everything Arc has grounds to say right now.
+ * Everything Cadence has grounds to say right now.
  *
  * Read-only — claiming is a separate step, so nothing is marked as said until
  * a client has actually shown it.

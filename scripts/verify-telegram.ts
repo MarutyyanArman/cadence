@@ -174,7 +174,7 @@ console.log("\n-- what we do with the profile --");
     "a Russian phone starts in Russian");
   t(localeFromTelegram("en-GB") === "en" && localeFromTelegram(undefined) === "en",
     "anything we don't speak starts in English");
-  t(localeFromTelegram("de-DE") === "en", "including languages Arc has no dictionary for");
+  t(localeFromTelegram("de-DE") === "en", "including languages Cadence has no dictionary for");
   t(displayName({ id: 1, first_name: "Арман", last_name: "Марутян" }) === "Арман М.",
     "a name shortens to first plus initial");
   t(displayName({ id: 1, username: "arman" }) === "@arman", "a username stands in");

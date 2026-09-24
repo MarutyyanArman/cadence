@@ -1,9 +1,9 @@
-# Arc
+# Cadence
 
 Goals, tasks and time — with the gap between planned and actual measured.
 
 Most task apps score volume: tasks closed, days logged. Volume is trivially
-gamed — split a task in two and you scored twice. Arc stores an estimate next
+gamed — split a task in two and you scored twice. Cadence stores an estimate next
 to every actual, so the number it puts in front of you is one you can only move
 by getting better at judging your own work.
 
@@ -42,7 +42,7 @@ npm install
 cp .env.example .env.local
 ```
 
-Fill in `ARC_SESSION_SECRET`:
+Fill in `CADENCE_SESSION_SECRET`:
 
 ```bash
 node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
@@ -51,17 +51,17 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 Postgres, if you don't have one:
 
 ```bash
-docker run -d --name arc-postgres --restart unless-stopped -e POSTGRES_PASSWORD=arc -e POSTGRES_DB=arc -p 5433:5432 -v arc-pgdata:/var/lib/postgresql/data postgres:16
+docker run -d --name cadence-postgres --restart unless-stopped -e POSTGRES_PASSWORD=cadence -e POSTGRES_DB=cadence -p 5433:5432 -v cadence-pgdata:/var/lib/postgresql/data postgres:16
 ```
 
 Load the schema and start:
 
 ```bash
-psql "postgres://postgres:arc@localhost:5433/arc" -f schema.sql
+psql "postgres://postgres:cadence@localhost:5433/cadence" -f schema.sql
 npm run dev
 ```
 
-`ARC_DEV_USER_ID` in `.env.example` points at the owner account, so localhost
+`CADENCE_DEV_USER_ID` in `.env.example` points at the owner account, so localhost
 works without going through Telegram. It is ignored when `NODE_ENV=production`.
 
 **Upgrading an existing database** rather than starting fresh: `schema.sql` is
@@ -79,12 +79,12 @@ it. Any Node host works; these are the steps for Vercel plus hosted Postgres.
    on the connection string.
 2. **Deploy.** Import this repo on [Vercel](https://vercel.com) and set the
    environment variables from `.env.example`: `DATABASE_URL`,
-   `ARC_SESSION_SECRET`, `TELEGRAM_BOT_TOKEN`,
+   `CADENCE_SESSION_SECRET`, `TELEGRAM_BOT_TOKEN`,
    `NEXT_PUBLIC_TELEGRAM_BOT_USERNAME`. Every push to `main` redeploys.
 3. **Bot.** In [@BotFather](https://t.me/BotFather): `/newbot` for a token,
    then `/newapp` to attach a Mini App pointing at the deployed URL.
 4. **Claim your history**, if you had data before accounts existed: set
-   `ARC_OWNER_TELEGRAM_ID` to your Telegram numeric id (ask
+   `CADENCE_OWNER_TELEGRAM_ID` to your Telegram numeric id (ask
    [@userinfobot](https://t.me/userinfobot)) and sign in once.
 
 ## How it's built

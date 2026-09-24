@@ -1,5 +1,5 @@
 /* ============================================================
-   Arc — design tokens
+   Cadence — design tokens
    Mirrors the Figma file 1:1 (Primitives → Color/Spacing/Radius/Typography).
    Variable names match the WEB code syntax set on every Figma variable.
    Tailwind v4. For v3, see tailwind.config.ts.

@@ -25,7 +25,7 @@ const toneBar: Record<string, string> = {
 };
 
 /**
- * The one score in Arc that can't be farmed.
+ * The one score in Cadence that can't be farmed.
  *
  * Deliberately placed above Goals: goals measure how much is left, calibration
  * measures whether you understand the work at all — which is the more useful

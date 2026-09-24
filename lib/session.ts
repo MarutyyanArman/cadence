@@ -12,7 +12,7 @@
  *
  *   1. An explicit `withUser(id, …)` scope. Used by the verify suites and by
  *      anything running outside a request, where there are no cookies.
- *   2. The session cookie, signed with `ARC_SESSION_SECRET`.
+ *   2. The session cookie, signed with `CADENCE_SESSION_SECRET`.
  *
  * And in development only, a fallback so `npm run dev` on localhost behaves
  * exactly as it did before anyone had to sign in.
@@ -20,20 +20,20 @@
 import { AsyncLocalStorage } from "node:async_hooks";
 import { createHmac, timingSafeEqual } from "node:crypto";
 
-export const SESSION_COOKIE = "arc_session";
+export const SESSION_COOKIE = "cadence_session";
 
 /** A month. Telegram reopens the app constantly; re-signing daily is noise. */
 export const SESSION_MAX_AGE = 60 * 60 * 24 * 30;
 
 /**
- * The account that adopted everything from before Arc was multi-user. Matches
+ * The account that adopted everything from before Cadence was multi-user. Matches
  * the fixed id in migrations/007-multi-user.sql.
  */
 export const OWNER_USER_ID = "00000000-0000-0000-0000-000000000001";
 
 export class NotSignedIn extends Error {
   constructor() {
-    super("No Arc session. Open this from Telegram, or set ARC_DEV_USER_ID for local use.");
+    super("No Cadence session. Open this from Telegram, or set CADENCE_DEV_USER_ID for local use.");
     this.name = "NotSignedIn";
   }
 }
@@ -52,10 +52,10 @@ export function withUser<T>(userId: string, fn: () => Promise<T>): Promise<T> {
 }
 
 function secret(): string {
-  const s = process.env.ARC_SESSION_SECRET;
+  const s = process.env.CADENCE_SESSION_SECRET;
   if (!s || s.length < 16) {
     throw new Error(
-      "ARC_SESSION_SECRET is missing or too short. Generate one with:\n" +
+      "CADENCE_SESSION_SECRET is missing or too short. Generate one with:\n" +
         "  node -e \"console.log(require('crypto').randomBytes(32).toString('hex'))\"",
     );
   }
@@ -110,7 +110,7 @@ export function readSessionToken(token: string | undefined, now = Date.now()): s
  */
 function devFallback(): string | null {
   if (process.env.NODE_ENV === "production") return null;
-  return process.env.ARC_DEV_USER_ID || null;
+  return process.env.CADENCE_DEV_USER_ID || null;
 }
 
 /**

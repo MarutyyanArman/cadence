@@ -32,12 +32,12 @@ export async function upsertTelegramUser(tg: TelegramUser): Promise<ArcUser> {
   const sql = db();
   const telegramId = String(tg.id);
 
-  // Claiming the pre-multi-user history. Set ARC_OWNER_TELEGRAM_ID to your own
+  // Claiming the pre-multi-user history. Set CADENCE_OWNER_TELEGRAM_ID to your own
   // Telegram id and your first sign-in adopts the owner account — with every
   // goal, task and logged hour that existed before accounts did — rather than
   // starting you on an empty one. It only ever fires while the owner account
   // is unclaimed, so it cannot transfer an account twice.
-  const ownerClaim = process.env.ARC_OWNER_TELEGRAM_ID;
+  const ownerClaim = process.env.CADENCE_OWNER_TELEGRAM_ID;
   if (ownerClaim && ownerClaim === telegramId) {
     await sql`
       update users

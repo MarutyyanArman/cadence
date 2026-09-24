@@ -784,7 +784,7 @@ export async function rolloverRecurring(): Promise<{ created: number; missed: nu
   return sql.begin(async (tx) => {
     // Per user, not global: one person opening the app must not make everyone
     // else's page load wait behind them.
-    await tx`select pg_advisory_xact_lock(hashtext(${`arc:rollover:${uid}`}))`;
+    await tx`select pg_advisory_xact_lock(hashtext(${`cadence:rollover:${uid}`}))`;
     const [{ today }] = await tx<{ today: string }[]>`
       select to_char(current_date, 'YYYY-MM-DD') as today
     `;

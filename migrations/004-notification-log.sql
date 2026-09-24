@@ -1,4 +1,4 @@
--- What Arc has already said, so it doesn't say it twice.
+-- What Cadence has already said, so it doesn't say it twice.
 --
 -- The unique index is the whole mechanism. A client claims a notification by
 -- inserting; if the insert conflicts, another tab already claimed it and this
