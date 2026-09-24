@@ -1,0 +1,295 @@
+/* ============================================================
+   Arc — design tokens
+   Mirrors the Figma file 1:1 (Primitives → Color/Spacing/Radius/Typography).
+   Variable names match the WEB code syntax set on every Figma variable.
+   Tailwind v4. For v3, see tailwind.config.ts.
+   ============================================================ */
+
+@import "tailwindcss";
+
+/* ---------- Primitives (raw values — never used directly in components) ---------- */
+:root {
+  --zinc-50:  #FAFAFA;
+  --zinc-100: #F4F4F5;
+  --zinc-200: #E4E4E7;
+  --zinc-300: #D4D4D8;
+  --zinc-400: #A1A1AA;
+  --zinc-500: #71717A;
+  --zinc-600: #52525B;
+  --zinc-700: #3F3F46;
+  --zinc-800: #27272A;
+  --zinc-900: #18181B;
+  --zinc-950: #09090B;
+
+  --violet-50:  #F3F0FF;
+  --violet-100: #E9E3FF;
+  --violet-200: #D5CAFF;
+  --violet-300: #B9A6FF;
+  --violet-400: #9B81FF;
+  --violet-500: #7C5CFF;
+  --violet-600: #6844E6;
+  --violet-700: #5533BF;
+  --violet-800: #422899;
+  --violet-900: #331E73;
+  --violet-950: #1E1147;
+
+  --teal-500:    #00C2A8;
+  --amber-500:   #FFB020;
+  --coral-500:   #FF6B6B;
+  --blue-500:    #4C9AFF;
+  --magenta-500: #B76BFF;
+  --green-500:   #34D399;
+
+  --white-1000: #FFFFFF;
+  --black-1000: #000000;
+
+  /* Dimensions — single mode, theme-independent */
+  --space-xxs: 2px;
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  12px;
+  --space-lg:  16px;
+  --space-xl:  24px;
+  --space-2xl: 32px;
+  --space-3xl: 48px;
+  --space-4xl: 64px;
+
+  --radius-none: 0px;
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   16px;
+  --radius-full: 999px;
+
+  --fs-xs:  12px;
+  --fs-sm:  14px;
+  --fs-md:  16px;
+  --fs-lg:  20px;
+  --fs-xl:  28px;
+  --fs-2xl: 40px;
+
+  --lh-xs:  16px;
+  --lh-sm:  20px;
+  --lh-md:  24px;
+  --lh-lg:  28px;
+  --lh-xl:  36px;
+  --lh-2xl: 48px;
+
+  --fw-regular:  400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+
+  --elevation-1: 0 1px 3px rgb(0 0 0 / 0.40);
+  --elevation-2: 0 8px 24px -4px rgb(0 0 0 / 0.50);
+  --focus-ring:  0 0 0 3px rgb(124 92 255 / 0.45);
+}
+
+/* ---------- Semantic: dark (default) ---------- */
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-bg-canvas:   var(--zinc-950);
+  --color-bg-surface:  var(--zinc-900);
+  --color-bg-elevated: var(--zinc-800);
+  --color-bg-hover:    var(--zinc-800);
+
+  --color-text-primary:   var(--zinc-50);
+  --color-text-secondary: var(--zinc-400);
+  --color-text-muted:     var(--zinc-500);
+  --color-text-inverse:   var(--zinc-950);
+
+  --color-border-subtle:  var(--zinc-900);
+  --color-border-default: var(--zinc-800);
+  --color-border-strong:  var(--zinc-700);
+  --color-border-focus:   var(--violet-500);
+
+  --color-accent-default: var(--violet-500);
+  --color-accent-hover:   var(--violet-400);
+  --color-accent-pressed: var(--violet-600);
+  --color-accent-subtle:  var(--violet-950);
+  --color-accent-text:    var(--violet-300);
+
+  --color-status-success: var(--green-500);
+  --color-status-warning: var(--amber-500);
+  --color-status-danger:  var(--coral-500);
+  --color-status-info:    var(--blue-500);
+
+  --color-chart-1: var(--violet-500);
+  --color-chart-2: var(--teal-500);
+  --color-chart-3: var(--amber-500);
+  --color-chart-4: var(--coral-500);
+  --color-chart-5: var(--blue-500);
+  --color-chart-6: var(--magenta-500);
+}
+
+/* ---------- Semantic: light ----------
+   This layer has no Figma counterpart — the Starter plan allows one variable
+   mode, so light theme lives only here. Keep it in sync by hand. */
+[data-theme="light"] {
+  color-scheme: light;
+
+  --color-bg-canvas:   var(--zinc-50);
+  --color-bg-surface:  var(--white-1000);
+  --color-bg-elevated: var(--white-1000);
+  --color-bg-hover:    var(--zinc-100);
+
+  --color-text-primary:   var(--zinc-900);
+  --color-text-secondary: var(--zinc-600);
+  --color-text-muted:     var(--zinc-500);
+  --color-text-inverse:   var(--zinc-50);
+
+  --color-border-subtle:  var(--zinc-100);
+  --color-border-default: var(--zinc-200);
+  --color-border-strong:  var(--zinc-300);
+  --color-border-focus:   var(--violet-600);
+
+  --color-accent-default: var(--violet-600);
+  --color-accent-hover:   var(--violet-500);
+  --color-accent-pressed: var(--violet-700);
+  --color-accent-subtle:  var(--violet-50);
+  --color-accent-text:    var(--violet-700);
+
+  /* darkened for contrast against light surfaces */
+  --color-status-success: #059669;
+  --color-status-warning: #B45309;
+  --color-status-danger:  #DC2626;
+  --color-status-info:    #2563EB;
+
+  --color-chart-1: var(--violet-600);
+  --color-chart-2: #0D9488;
+  --color-chart-3: #D97706;
+  --color-chart-4: #E11D48;
+  --color-chart-5: #2563EB;
+  --color-chart-6: #9333EA;
+
+  --elevation-1: 0 1px 3px rgb(0 0 0 / 0.08);
+  --elevation-2: 0 8px 24px -4px rgb(0 0 0 / 0.12);
+}
+
+/* ---------- Tailwind v4 mapping ----------
+   Short utility names: bg-canvas, text-fg, border-line, bg-accent, text-chart-2 */
+@theme inline {
+  --color-canvas:   var(--color-bg-canvas);
+  --color-surface:  var(--color-bg-surface);
+  --color-elevated: var(--color-bg-elevated);
+  --color-hovered:  var(--color-bg-hover);
+
+  --color-fg:           var(--color-text-primary);
+  --color-fg-secondary: var(--color-text-secondary);
+  --color-fg-muted:     var(--color-text-muted);
+  --color-fg-inverse:   var(--color-text-inverse);
+
+  --color-line:        var(--color-border-default);
+  --color-line-subtle: var(--color-border-subtle);
+  --color-line-strong: var(--color-border-strong);
+  --color-line-focus:  var(--color-border-focus);
+
+  --color-accent:         var(--color-accent-default);
+  --color-accent-hover:   var(--color-accent-hover);
+  --color-accent-pressed: var(--color-accent-pressed);
+  --color-accent-subtle:  var(--color-accent-subtle);
+  --color-accent-text:    var(--color-accent-text);
+
+  --color-success: var(--color-status-success);
+  --color-warning: var(--color-status-warning);
+  --color-danger:  var(--color-status-danger);
+  --color-info:    var(--color-status-info);
+
+  --color-chart-1: var(--color-chart-1);
+  --color-chart-2: var(--color-chart-2);
+  --color-chart-3: var(--color-chart-3);
+  --color-chart-4: var(--color-chart-4);
+  --color-chart-5: var(--color-chart-5);
+  --color-chart-6: var(--color-chart-6);
+
+  --spacing-xxs: var(--space-xxs);
+  --spacing-xs:  var(--space-xs);
+  --spacing-sm:  var(--space-sm);
+  --spacing-md:  var(--space-md);
+  --spacing-lg:  var(--space-lg);
+  --spacing-xl:  var(--space-xl);
+  --spacing-2xl: var(--space-2xl);
+  --spacing-3xl: var(--space-3xl);
+  --spacing-4xl: var(--space-4xl);
+
+  --radius-sm:   var(--radius-sm);
+  --radius-md:   var(--radius-md);
+  --radius-lg:   var(--radius-lg);
+  --radius-full: var(--radius-full);
+
+  --font-sans:    'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono Variable', ui-monospace, monospace;
+
+  --shadow-e1:    var(--elevation-1);
+  --shadow-e2:    var(--elevation-2);
+  --shadow-focus: var(--focus-ring);
+}
+
+/* ---------- Base ---------- */
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    /* numbers change constantly in this app — never let them jitter */
+    font-variant-numeric: tabular-nums;
+  }
+
+  body {
+    background-color: var(--color-bg-canvas);
+    color: var(--color-text-primary);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-sm);
+  }
+
+  /* Figma text style equivalents */
+  .t-metric  { font-family: var(--font-display); font-size: var(--fs-2xl); line-height: var(--lh-2xl); font-weight: var(--fw-bold);     letter-spacing: -0.03em; }
+  .t-h1      { font-family: var(--font-display); font-size: var(--fs-xl);  line-height: var(--lh-xl);  font-weight: var(--fw-semibold); letter-spacing: -0.02em; }
+  .t-h2      { font-size: var(--fs-lg); line-height: var(--lh-lg); font-weight: var(--fw-semibold); letter-spacing: -0.01em; }
+  .t-h3      { font-size: var(--fs-md); line-height: var(--lh-md); font-weight: var(--fw-semibold); }
+  .t-body-lg { font-size: var(--fs-md); line-height: var(--lh-md); }
+  .t-body    { font-size: var(--fs-sm); line-height: var(--lh-sm); }
+  .t-body-sm { font-size: var(--fs-xs); line-height: var(--lh-xs); }
+  .t-label   { font-size: var(--fs-sm); line-height: var(--lh-sm); font-weight: var(--fw-medium); }
+  .t-numeric { font-family: var(--font-display); font-size: var(--fs-lg); line-height: var(--lh-lg); font-weight: var(--fw-medium); }
+  .t-data    { font-family: var(--font-mono);    font-size: var(--fs-xs); line-height: var(--lh-xs); }
+
+  :focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+    border-radius: var(--radius-sm);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* ---------- phones ----------
+
+     Safari zooms the whole page when you focus an input whose text is under
+     16px, and then leaves you zoomed in. The usual fix is
+     `maximum-scale=1` on the viewport, which also takes pinch-zoom away from
+     people who need it. Setting the font size instead costs nothing and keeps
+     the page zoomable. Above `sm` the smaller sizes come back. */
+  @media (max-width: 639px) {
+    input, select, textarea {
+      font-size: 16px;
+      line-height: var(--lh-md);
+    }
+    /* Native date inputs render a fixed-width control; let it shrink instead
+       of pushing the composer's row off the screen. */
+    input[type="date"] { min-width: 0; }
+  }
+
+  html {
+    /* Landscape rotation on iOS otherwise inflates text on its own. */
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Telegram's Mini App fills the screen and reports its own viewport height;
+     dvh follows the keyboard and the browser chrome, which vh does not. */
+  body { min-height: 100dvh; }
+}

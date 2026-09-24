@@ -1,0 +1,35 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.*
+
+# build output
+.next/
+out/
+build/
+*.tsbuildinfo
+next-env.d.ts
+
+# secrets — every one of these holds a real credential
+.env
+.env.local
+.env*.local
+
+# database dumps: real task history, not code
+backups/
+*.dump
+*.sql.gz
+
+# hosting
+.vercel
+
+# editors and OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# logs
+npm-debug.log*
+yarn-error.log*
