@@ -110,6 +110,29 @@ function OverdueActions({
   );
 }
 
+/**
+ * What it was going to cost against what it cost — the number this whole app
+ * exists to show. On a narrow screen there is no room for it in the row's
+ * right-hand column beside the due pill and two controls, so it moves under
+ * the title instead of being dropped.
+ */
+function EstimateVsActual({ task, t }: { task: TaskRowData; t: Dict }) {
+  if (task.estMinutes === null) return null;
+  const over = task.actualMinutes > task.estMinutes;
+  return (
+    <>
+      {t.fmt.minutes(task.actualMinutes)}
+      <span className="text-fg-muted/60"> / {t.fmt.minutes(task.estMinutes)}</span>
+      {over && (
+        <span className="text-warning">
+          {" "}
+          +{Math.round((task.actualMinutes / task.estMinutes - 1) * 100)}%
+        </span>
+      )}
+    </>
+  );
+}
+
 const goalDot: Record<number, string> = {
   1: "bg-chart-1",
   2: "bg-chart-2",
@@ -159,7 +182,6 @@ export function TaskRow({
   const { t } = useT();
   const done = task.status === "done";
   const due = dueLabel(task.dueAt, t);
-  const over = task.estMinutes !== null && task.actualMinutes > task.estMinutes;
   const [confirming, setConfirming] = React.useState(false);
 
   return (
@@ -203,28 +225,27 @@ export function TaskRow({
             />
           )}
         </p>
-        {task.goalTitle && (
-          <span className="mt-0.5 flex items-center gap-xs text-xs text-fg-muted">
-            <span className={cn("size-1.5 rounded-full", goalDot[task.goalColorSlot])} />
-            {task.goalTitle}
-          </span>
-        )}
+        <span className="mt-0.5 flex items-center gap-xs text-xs text-fg-muted">
+          {task.goalTitle && (
+            <>
+              <span className={cn("size-1.5 shrink-0 rounded-full", goalDot[task.goalColorSlot])} />
+              <span className="truncate">{task.goalTitle}</span>
+            </>
+          )}
+          {task.estMinutes !== null && (
+            <span className="shrink-0 font-mono tabular-nums sm:hidden">
+              <EstimateVsActual task={task} t={t} />
+            </span>
+          )}
+        </span>
         {today && onReschedule && onDrop && !done && (
           <OverdueActions task={task} today={today} onReschedule={onReschedule} onDrop={onDrop} />
         )}
       </div>
 
-      {/* The point of the product: what it was going to cost vs what it cost. */}
       {task.estMinutes !== null && (
-        <span className="hidden shrink-0 font-mono text-xs text-fg-muted tabular-nums min-[420px]:inline">
-          {t.fmt.minutes(task.actualMinutes)}
-          <span className="text-fg-muted/60"> / {t.fmt.minutes(task.estMinutes)}</span>
-          {over && (
-            <span className="text-warning">
-              {" "}
-              +{Math.round((task.actualMinutes / task.estMinutes - 1) * 100)}%
-            </span>
-          )}
+        <span className="hidden shrink-0 font-mono text-xs text-fg-muted tabular-nums sm:inline">
+          <EstimateVsActual task={task} t={t} />
         </span>
       )}
 
