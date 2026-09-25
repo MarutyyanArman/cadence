@@ -18,7 +18,7 @@ export async function SignInGate() {
   const isDev = process.env.NODE_ENV !== "production";
 
   return (
-    <main className="mx-auto flex min-h-dvh max-w-md flex-col justify-center gap-xl px-xl py-3xl">
+    <main className="mx-auto flex min-h-dvh max-w-[28rem] flex-col justify-center gap-xl px-xl py-3xl">
       <div className="flex items-start justify-between gap-md">
         <div>
           <h1 className="t-h1">{t.app.name}</h1>

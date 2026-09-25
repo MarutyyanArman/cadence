@@ -158,13 +158,35 @@ console.log("\n-- the check string --");
   const expected = createHmac("sha256", secret).update(dataCheckString(params)).digest("hex");
   t(signInitData(params, TOKEN) === expected, "the secret is HMAC(key: 'WebAppData', msg: token)");
 
-  // Telegram sends `signature` alongside `hash` for its newer Ed25519 scheme;
-  // it is not part of what the HMAC covers, so it must be excluded too.
-  const withSig = new URLSearchParams(makeInitData());
-  withSig.set("signature", "something-telegram-added");
+  // Real initData carries a `signature` field beside `hash` (Telegram's newer
+  // Ed25519 scheme for third parties). For the bot-token HMAC it is an ordinary
+  // field, so the HMAC covers it. An earlier version of this test asserted the
+  // opposite and passed for the wrong reason: it signed a blob WITHOUT the
+  // field and bolted it on afterwards. Real Telegram signs WITH it present.
+  const realistic = makeInitData({ signature: "dGVsZWdyYW0tZWQyNTUxOS1zaWduYXR1cmU" });
   t(
-    verifyInitData(withSig.toString(), TOKEN, NOW).ok,
-    "an added `signature` field doesn't break the HMAC check",
+    verifyInitData(realistic, TOKEN, NOW).ok,
+    "a blob signed with a `signature` field present verifies (the real-world shape)",
+  );
+  t(
+    dataCheckString(new URLSearchParams(realistic)).includes("signature="),
+    "and the check string includes that field",
+  );
+  t(
+    !dataCheckString(new URLSearchParams(realistic)).includes("hash="),
+    "while still leaving out `hash` itself",
+  );
+  const tamperedSig = new URLSearchParams(realistic);
+  tamperedSig.set("signature", "something-else");
+  t(
+    !verifyInitData(tamperedSig.toString(), TOKEN, NOW).ok,
+    "changing `signature` afterwards breaks the HMAC, because it is covered",
+  );
+  const boltedOn = new URLSearchParams(makeInitData());
+  boltedOn.set("signature", "added-after-signing");
+  t(
+    !verifyInitData(boltedOn.toString(), TOKEN, NOW).ok,
+    "and a field added after signing is rejected rather than ignored",
   );
 }
 

@@ -63,10 +63,20 @@ function equalHex(a: string, b: string): boolean {
  *
  * Built from the *decoded* values, sorted by key. `URLSearchParams` decodes for
  * us; re-encoding here would produce a different string and fail every check.
+ *
+ * Only `hash` is left out: it is the thing being compared. Real initData also
+ * carries a `signature` field (Telegram's newer Ed25519 scheme for third
+ * parties), and for *this* bot-token HMAC method it is an ordinary field like
+ * any other — the HMAC covers it. The "except hash and signature" rule in
+ * Telegram's docs belongs to the Ed25519 method, which builds a different
+ * string. This function once dropped `signature` too, having conflated the
+ * two; every real sign-in was rejected while synthetic test data, which had no
+ * such field, kept passing. See verify-telegram.ts for the test that would
+ * have caught it.
  */
 export function dataCheckString(params: URLSearchParams): string {
   return [...params.entries()]
-    .filter(([k]) => k !== "hash" && k !== "signature")
+    .filter(([k]) => k !== "hash")
     .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
     .map(([k, v]) => `${k}=${v}`)
     .join("\n");

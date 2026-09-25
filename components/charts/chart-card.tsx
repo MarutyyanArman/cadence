@@ -31,7 +31,7 @@ export async function ChartCard({
       </header>
       {empty ? (
         <div className="flex flex-1 items-center justify-center rounded-sm border border-dashed border-line px-md py-xl">
-          <p className="max-w-xs text-center text-xs text-fg-secondary">
+          <p className="max-w-[20rem] text-center text-xs text-fg-secondary">
             {emptyMessage ?? t.charts.notEnough}
           </p>
         </div>
